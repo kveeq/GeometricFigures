@@ -48,12 +48,14 @@ namespace WindowsFormsApp1
             this.btn_Circle = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.button10);
             this.panel1.Controls.Add(this.trackBar1);
             this.panel1.Controls.Add(this.button9);
@@ -87,7 +89,7 @@ namespace WindowsFormsApp1
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(597, 12);
+            this.trackBar1.Location = new System.Drawing.Point(611, 28);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(146, 56);
             this.trackBar1.TabIndex = 14;
@@ -239,6 +241,15 @@ namespace WindowsFormsApp1
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
             this.panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseUp);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(621, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(146, 22);
+            this.textBox1.TabIndex = 16;
+            this.textBox1.Text = "Выбрать толщину";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -277,6 +288,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
