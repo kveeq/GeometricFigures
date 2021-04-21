@@ -32,7 +32,7 @@ namespace WindowsFormsApp1
             if (e.Button == MouseButtons.Left)
             {
                 //Запоминаем вторую вершину
-                vertexes[1] = e.Location;
+                
                 try
                 {
                     //Считаем третью вершину
@@ -86,7 +86,8 @@ namespace WindowsFormsApp1
         private void panel2_MouseUp(object sender, MouseEventArgs e)
         {
             CursorX = e.Location.X;
-            CursorY = e.Location.Y;
+            CursorY = e.Location.Y; 
+            vertexes[1] = e.Location;
 
             int r = CursorX - CursorX1;
 
@@ -111,7 +112,6 @@ namespace WindowsFormsApp1
             else if (btn_triangle.Focused)
             {
                 vertexes[0] = vertex0;
-                this.MouseMove += panel2_MouseMove;
                 Triangle triangle = new Triangle(vertexes);
                 triangle.Draw(panel2, button10, trackBar1);
             }
