@@ -11,19 +11,19 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
         PointF vertex0;
+        float r;
         PointF[] vertexes = new PointF[3];
-        Bitmap bmp;
 
         public Form1()
         {
             InitializeComponent();
-            bmp = new Bitmap(panel2.Width, panel2.Height);
         }
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
@@ -31,7 +31,7 @@ namespace WindowsFormsApp1
             if (e.Button == MouseButtons.Left)
             {
                 //Запоминаем вторую вершину
-                
+
                 try
                 {
                     //Считаем третью вершину
@@ -84,7 +84,7 @@ namespace WindowsFormsApp1
         private void panel2_MouseUp(object sender, MouseEventArgs e)
         {
             vertexes[1] = e.Location;
-            float r = vertexes[1].X - vertex0.X;
+            r = vertexes[1].X - vertex0.X;
 
             if (btn_Circle.Focused)
             {
@@ -98,10 +98,9 @@ namespace WindowsFormsApp1
             }
             else if (btn_Rectangle.Focused)
             {
-
                 float width = Math.Abs(vertexes[1].X - vertex0.X);
                 float height = Math.Abs(vertexes[1].Y - vertex0.Y);
-                Rectangle rectangle = new Rectangle(vertex0.X, vertex0.Y, width, height);
+                Rectangles rectangle = new Rectangles(vertex0.X, vertex0.Y, width, height);
                 rectangle.Draw(panel2, button10, trackBar1);
             }
             else if (btn_triangle.Focused)
@@ -127,105 +126,29 @@ namespace WindowsFormsApp1
         {
             button10.BackColor = ((Button)sender).BackColor;
         }
-    }
 
-
-    class Figure
-    {
-        protected float X;
-        protected float Y;
-        protected PointF[] vertexes;
-        //public Bitmap bmp;
-
-        public Figure(float newX, float newY)
+        private void btn_Save_Click(object sender, EventArgs e)
         {
-            X = newX;
-            Y = newY;
+            string tempPath = "";
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                tempPath = saveFileDialog.FileName;
+            }
+            Rectangle rect = new Rectangle(Point.Empty, panel2.Size);
+            Bitmap bitmap = new Bitmap(rect.Width, rect.Height, PixelFormat.Format32bppArgb);
+            panel2.DrawToBitmap(bitmap, rect);
+            bitmap.Save(tempPath, ImageFormat.Jpeg);
         }
 
-        public Figure(PointF[] vertex)
+        private void btn_Open_Click_1(object sender, EventArgs e)
         {
-            vertexes = vertex;
-        }
-
-        public virtual bool Draw(int newX, int newY)
-        {
-            return false;
-        }
-    }
-
-    class Circle : Figure
-    {
-        float radius;
-        public Circle(float newX, float newY, float R) : base(newX, newY)
-        {
-            radius = R;
-        }
-
-        public void Draw(Panel panel2, Button btn, TrackBar trackbar)
-        { 
-            Pen pen = new Pen(Color.Black, trackbar.Value);
-            pen.Color = btn.BackColor;
-            Graphics g = panel2.CreateGraphics();
-            g.DrawEllipse(pen, X, Y, radius, radius);
-            //Graphics.FromImage(bmp).DrawEllipse(pen, X, Y, radius, radius);
-            //panel2.DrawToBitmap(bmp, g.DrawEllipse());
-            //g.CopyFromScreen = bmp;
-            
-        }
-    }
-
-    class Section : Figure
-    {
-        float X2;
-        float Y2;
-        public Section(float x1, float y1, float x2, float y2) : base(x1, y1)
-        {
-            X2 = x2;
-            Y2 = y2;
-        }
-
-        public void Draw(Panel panel2, Button btn, TrackBar trackbar)
-        {
-            Pen pen = new Pen(Color.Black, trackbar.Value);
-            pen.Color = btn.BackColor;
-            Graphics g = panel2.CreateGraphics();
-            g.DrawLine(pen, X, Y, X2, Y2);
-        }
-    }
-
-    class Rectangle : Figure
-    {
-        float width;
-        float height;
-        public Rectangle(float x1, float y1, float x2, float y2) : base(x1, y1)
-        {
-            width = x2;
-            height = y2;
-        }
-
-        public void Draw(Panel panel2, Button btn, TrackBar trackbar)
-        {
-            Pen pen = new Pen(Color.Black, trackbar.Value);
-            pen.Color = btn.BackColor;
-            Graphics g = panel2.CreateGraphics();
-            g.DrawRectangle(pen, X, Y, width, height);
-        }
-    }
-
-    class Triangle : Figure
-    {
-        public Triangle(PointF[] vertexes) : base(vertexes)
-        {
-
-        }
-
-        public void Draw(Panel panel2, Button btn, TrackBar trackbar)
-        {
-            Pen pen = new Pen(Color.Black, trackbar.Value);
-            pen.Color = btn.BackColor;
-            Graphics g = panel2.CreateGraphics();
-            g.DrawPolygon(pen, vertexes);
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                panel2.BackgroundImage = Image.FromFile(openFileDialog.FileName);
+            }
+            openFileDialog.Dispose();
         }
     }
 }

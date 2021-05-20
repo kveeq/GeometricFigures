@@ -30,6 +30,7 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button11 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button10 = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -50,12 +51,15 @@ namespace WindowsFormsApp1
             this.panel2 = new System.Windows.Forms.Panel();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.btn_Open = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btn_Open);
+            this.panel1.Controls.Add(this.button11);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.button10);
             this.panel1.Controls.Add(this.trackBar1);
@@ -76,8 +80,18 @@ namespace WindowsFormsApp1
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(793, 90);
+            this.panel1.Size = new System.Drawing.Size(968, 90);
             this.panel1.TabIndex = 5;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(788, 12);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(150, 30);
+            this.button11.TabIndex = 0;
+            this.button11.Text = "Сохранить рисунок";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // textBox1
             // 
@@ -245,17 +259,27 @@ namespace WindowsFormsApp1
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 90);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(793, 360);
+            this.panel2.Size = new System.Drawing.Size(968, 360);
             this.panel2.TabIndex = 6;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
             this.panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseUp);
             // 
+            // btn_Open
+            // 
+            this.btn_Open.Location = new System.Drawing.Point(788, 49);
+            this.btn_Open.Name = "btn_Open";
+            this.btn_Open.Size = new System.Drawing.Size(150, 30);
+            this.btn_Open.TabIndex = 17;
+            this.btn_Open.Text = "Открыть рисунок";
+            this.btn_Open.UseVisualStyleBackColor = true;
+            this.btn_Open.Click += new System.EventHandler(this.btn_Open_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 450);
+            this.ClientSize = new System.Drawing.Size(968, 450);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
@@ -291,6 +315,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button btn_Open;
     }
 }
 
